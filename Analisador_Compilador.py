@@ -1,4 +1,5 @@
 """
+Commit de toño
 ANALIZADOR SEMÁNTICO PF2024 - VERSIÓN COMPLETA
 Incluye análisis semántico con detección de errores detallada
 """
