@@ -9,7 +9,6 @@ Unused terminals:
     FALS
     IGUAL
     IMPBOOL
-    IMPDIG
     IN
     INTER
     LEERBOOL
@@ -57,15 +56,16 @@ Rule 24    expresion -> PAREN expresion TESIS
 Rule 25    expresion -> ID
 Rule 26    expresion -> CINT
 Rule 27    llamada_funcion -> IMPCAD PAREN parametro TESIS PC
-Rule 28    llamada_funcion -> LEERDIG PAREN ID TESIS PC
-Rule 29    parametro -> CAD
-Rule 30    parametro -> ID
+Rule 28    llamada_funcion -> IMPDIG PAREN parametro TESIS PC
+Rule 29    llamada_funcion -> LEERDIG PAREN ID TESIS PC
+Rule 30    parametro -> CAD
+Rule 31    parametro -> ID
 
 Terminals, with rules where they appear
 
 AND                  : 
 ASIG                 : 18
-CAD                  : 29
+CAD                  : 30
 CINT                 : 26
 COMA                 : 11
 DECL                 : 4
@@ -75,17 +75,17 @@ ERROR_IDENTIFICADOR  :
 ERROR_IDENTIFICADOR_SIM : 
 FALS                 : 
 FIN                  : 13
-ID                   : 1 11 12 18 25 28 30
+ID                   : 1 11 12 18 25 29 31
 IGUAL                : 
 IMPBOOL              : 
 IMPCAD               : 27
-IMPDIG               : 
+IMPDIG               : 28
 IN                   : 
 INICIO               : 13
 INTER                : 
 LEERBOOL             : 
 LEERCAD              : 
-LEERDIG              : 28
+LEERDIG              : 29
 MAS                  : 19
 MENOS                : 20 23
 MIENTRAS             : 
@@ -93,15 +93,15 @@ MUL                  : 21
 NOT                  : 
 OR                   : 
 PARA                 : 
-PAREN                : 24 27 28
-PC                   : 7 18 27 28
+PAREN                : 24 27 28 29
+PC                   : 7 18 27 28 29
 PROG                 : 1
 SI                   : 
 SIGDIF               : 
 SIGMAYOR             : 
 SIGMENOR             : 
 SINO                 : 
-TESIS                : 24 27 28
+TESIS                : 24 27 28 29
 TIPO                 : 
 TIPO_BOOL            : 10
 TIPO_CAD             : 9
@@ -122,7 +122,7 @@ instrucciones        : 13 14
 lista_declaraciones  : 4 5
 lista_variables      : 7 11
 llamada_funcion      : 17
-parametro            : 27
+parametro            : 27 28
 programa             : 0
 programa_decl        : 1
 tipo                 : 7
@@ -216,11 +216,13 @@ state 8
     (17) instruccion -> . llamada_funcion
     (18) asignacion -> . ID ASIG expresion PC
     (27) llamada_funcion -> . IMPCAD PAREN parametro TESIS PC
-    (28) llamada_funcion -> . LEERDIG PAREN ID TESIS PC
+    (28) llamada_funcion -> . IMPDIG PAREN parametro TESIS PC
+    (29) llamada_funcion -> . LEERDIG PAREN ID TESIS PC
 
     ID              shift and go to state 20
     IMPCAD          shift and go to state 21
-    LEERDIG         shift and go to state 22
+    IMPDIG          shift and go to state 22
+    LEERDIG         shift and go to state 23
 
     instrucciones                  shift and go to state 16
     instruccion                    shift and go to state 17
@@ -258,7 +260,7 @@ state 11
     TIPO_BOOL       shift and go to state 15
 
     declaracion                    shift and go to state 11
-    lista_declaraciones            shift and go to state 23
+    lista_declaraciones            shift and go to state 24
     tipo                           shift and go to state 12
 
 state 12
@@ -267,9 +269,9 @@ state 12
     (11) lista_variables -> . ID COMA lista_variables
     (12) lista_variables -> . ID
 
-    ID              shift and go to state 25
+    ID              shift and go to state 26
 
-    lista_variables                shift and go to state 24
+    lista_variables                shift and go to state 25
 
 state 13
 
@@ -296,7 +298,7 @@ state 16
 
     (13) cuerpo_programa -> INICIO instrucciones . FIN
 
-    FIN             shift and go to state 26
+    FIN             shift and go to state 27
 
 
 state 17
@@ -309,15 +311,17 @@ state 17
     (17) instruccion -> . llamada_funcion
     (18) asignacion -> . ID ASIG expresion PC
     (27) llamada_funcion -> . IMPCAD PAREN parametro TESIS PC
-    (28) llamada_funcion -> . LEERDIG PAREN ID TESIS PC
+    (28) llamada_funcion -> . IMPDIG PAREN parametro TESIS PC
+    (29) llamada_funcion -> . LEERDIG PAREN ID TESIS PC
 
     FIN             reduce using rule 15 (instrucciones -> instruccion .)
     ID              shift and go to state 20
     IMPCAD          shift and go to state 21
-    LEERDIG         shift and go to state 22
+    IMPDIG          shift and go to state 22
+    LEERDIG         shift and go to state 23
 
     instruccion                    shift and go to state 17
-    instrucciones                  shift and go to state 27
+    instrucciones                  shift and go to state 28
     asignacion                     shift and go to state 18
     llamada_funcion                shift and go to state 19
 
@@ -327,6 +331,7 @@ state 18
 
     ID              reduce using rule 16 (instruccion -> asignacion .)
     IMPCAD          reduce using rule 16 (instruccion -> asignacion .)
+    IMPDIG          reduce using rule 16 (instruccion -> asignacion .)
     LEERDIG         reduce using rule 16 (instruccion -> asignacion .)
     FIN             reduce using rule 16 (instruccion -> asignacion .)
 
@@ -337,6 +342,7 @@ state 19
 
     ID              reduce using rule 17 (instruccion -> llamada_funcion .)
     IMPCAD          reduce using rule 17 (instruccion -> llamada_funcion .)
+    IMPDIG          reduce using rule 17 (instruccion -> llamada_funcion .)
     LEERDIG         reduce using rule 17 (instruccion -> llamada_funcion .)
     FIN             reduce using rule 17 (instruccion -> llamada_funcion .)
 
@@ -345,61 +351,68 @@ state 20
 
     (18) asignacion -> ID . ASIG expresion PC
 
-    ASIG            shift and go to state 28
+    ASIG            shift and go to state 29
 
 
 state 21
 
     (27) llamada_funcion -> IMPCAD . PAREN parametro TESIS PC
 
-    PAREN           shift and go to state 29
+    PAREN           shift and go to state 30
 
 
 state 22
 
-    (28) llamada_funcion -> LEERDIG . PAREN ID TESIS PC
+    (28) llamada_funcion -> IMPDIG . PAREN parametro TESIS PC
 
-    PAREN           shift and go to state 30
+    PAREN           shift and go to state 31
 
 
 state 23
+
+    (29) llamada_funcion -> LEERDIG . PAREN ID TESIS PC
+
+    PAREN           shift and go to state 32
+
+
+state 24
 
     (5) lista_declaraciones -> declaracion lista_declaraciones .
 
     INICIO          reduce using rule 5 (lista_declaraciones -> declaracion lista_declaraciones .)
 
 
-state 24
+state 25
 
     (7) declaracion -> tipo lista_variables . PC
 
-    PC              shift and go to state 31
+    PC              shift and go to state 33
 
 
-state 25
+state 26
 
     (11) lista_variables -> ID . COMA lista_variables
     (12) lista_variables -> ID .
 
-    COMA            shift and go to state 32
+    COMA            shift and go to state 34
     PC              reduce using rule 12 (lista_variables -> ID .)
 
 
-state 26
+state 27
 
     (13) cuerpo_programa -> INICIO instrucciones FIN .
 
     $end            reduce using rule 13 (cuerpo_programa -> INICIO instrucciones FIN .)
 
 
-state 27
+state 28
 
     (14) instrucciones -> instruccion instrucciones .
 
     FIN             reduce using rule 14 (instrucciones -> instruccion instrucciones .)
 
 
-state 28
+state 29
 
     (18) asignacion -> ID ASIG . expresion PC
     (19) expresion -> . expresion MAS expresion
@@ -411,32 +424,43 @@ state 28
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 34
-
-state 29
-
-    (27) llamada_funcion -> IMPCAD PAREN . parametro TESIS PC
-    (29) parametro -> . CAD
-    (30) parametro -> . ID
-
-    CAD             shift and go to state 39
-    ID              shift and go to state 40
-
-    parametro                      shift and go to state 38
+    expresion                      shift and go to state 36
 
 state 30
 
-    (28) llamada_funcion -> LEERDIG PAREN . ID TESIS PC
+    (27) llamada_funcion -> IMPCAD PAREN . parametro TESIS PC
+    (30) parametro -> . CAD
+    (31) parametro -> . ID
 
-    ID              shift and go to state 41
+    CAD             shift and go to state 41
+    ID              shift and go to state 42
 
+    parametro                      shift and go to state 40
 
 state 31
+
+    (28) llamada_funcion -> IMPDIG PAREN . parametro TESIS PC
+    (30) parametro -> . CAD
+    (31) parametro -> . ID
+
+    CAD             shift and go to state 41
+    ID              shift and go to state 42
+
+    parametro                      shift and go to state 43
+
+state 32
+
+    (29) llamada_funcion -> LEERDIG PAREN . ID TESIS PC
+
+    ID              shift and go to state 44
+
+
+state 33
 
     (7) declaracion -> tipo lista_variables PC .
 
@@ -446,17 +470,17 @@ state 31
     INICIO          reduce using rule 7 (declaracion -> tipo lista_variables PC .)
 
 
-state 32
+state 34
 
     (11) lista_variables -> ID COMA . lista_variables
     (11) lista_variables -> . ID COMA lista_variables
     (12) lista_variables -> . ID
 
-    ID              shift and go to state 25
+    ID              shift and go to state 26
 
-    lista_variables                shift and go to state 42
+    lista_variables                shift and go to state 45
 
-state 33
+state 35
 
     (25) expresion -> ID .
 
@@ -468,7 +492,7 @@ state 33
     TESIS           reduce using rule 25 (expresion -> ID .)
 
 
-state 34
+state 36
 
     (18) asignacion -> ID ASIG expresion . PC
     (19) expresion -> expresion . MAS expresion
@@ -476,14 +500,14 @@ state 34
     (21) expresion -> expresion . MUL expresion
     (22) expresion -> expresion . DIV expresion
 
-    PC              shift and go to state 43
-    MAS             shift and go to state 44
-    MENOS           shift and go to state 45
-    MUL             shift and go to state 46
-    DIV             shift and go to state 47
+    PC              shift and go to state 46
+    MAS             shift and go to state 47
+    MENOS           shift and go to state 48
+    MUL             shift and go to state 49
+    DIV             shift and go to state 50
 
 
-state 35
+state 37
 
     (23) expresion -> MENOS . expresion
     (19) expresion -> . expresion MAS expresion
@@ -495,14 +519,14 @@ state 35
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 48
+    expresion                      shift and go to state 51
 
-state 36
+state 38
 
     (24) expresion -> PAREN . expresion TESIS
     (19) expresion -> . expresion MAS expresion
@@ -514,14 +538,14 @@ state 36
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 49
+    expresion                      shift and go to state 52
 
-state 37
+state 39
 
     (26) expresion -> CINT .
 
@@ -533,52 +557,60 @@ state 37
     TESIS           reduce using rule 26 (expresion -> CINT .)
 
 
-state 38
+state 40
 
     (27) llamada_funcion -> IMPCAD PAREN parametro . TESIS PC
 
-    TESIS           shift and go to state 50
-
-
-state 39
-
-    (29) parametro -> CAD .
-
-    TESIS           reduce using rule 29 (parametro -> CAD .)
-
-
-state 40
-
-    (30) parametro -> ID .
-
-    TESIS           reduce using rule 30 (parametro -> ID .)
+    TESIS           shift and go to state 53
 
 
 state 41
 
-    (28) llamada_funcion -> LEERDIG PAREN ID . TESIS PC
+    (30) parametro -> CAD .
 
-    TESIS           shift and go to state 51
+    TESIS           reduce using rule 30 (parametro -> CAD .)
 
 
 state 42
+
+    (31) parametro -> ID .
+
+    TESIS           reduce using rule 31 (parametro -> ID .)
+
+
+state 43
+
+    (28) llamada_funcion -> IMPDIG PAREN parametro . TESIS PC
+
+    TESIS           shift and go to state 54
+
+
+state 44
+
+    (29) llamada_funcion -> LEERDIG PAREN ID . TESIS PC
+
+    TESIS           shift and go to state 55
+
+
+state 45
 
     (11) lista_variables -> ID COMA lista_variables .
 
     PC              reduce using rule 11 (lista_variables -> ID COMA lista_variables .)
 
 
-state 43
+state 46
 
     (18) asignacion -> ID ASIG expresion PC .
 
     ID              reduce using rule 18 (asignacion -> ID ASIG expresion PC .)
     IMPCAD          reduce using rule 18 (asignacion -> ID ASIG expresion PC .)
+    IMPDIG          reduce using rule 18 (asignacion -> ID ASIG expresion PC .)
     LEERDIG         reduce using rule 18 (asignacion -> ID ASIG expresion PC .)
     FIN             reduce using rule 18 (asignacion -> ID ASIG expresion PC .)
 
 
-state 44
+state 47
 
     (19) expresion -> expresion MAS . expresion
     (19) expresion -> . expresion MAS expresion
@@ -590,14 +622,14 @@ state 44
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 52
+    expresion                      shift and go to state 56
 
-state 45
+state 48
 
     (20) expresion -> expresion MENOS . expresion
     (19) expresion -> . expresion MAS expresion
@@ -609,14 +641,14 @@ state 45
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 53
+    expresion                      shift and go to state 57
 
-state 46
+state 49
 
     (21) expresion -> expresion MUL . expresion
     (19) expresion -> . expresion MAS expresion
@@ -628,14 +660,14 @@ state 46
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 54
+    expresion                      shift and go to state 58
 
-state 47
+state 50
 
     (22) expresion -> expresion DIV . expresion
     (19) expresion -> . expresion MAS expresion
@@ -647,14 +679,14 @@ state 47
     (25) expresion -> . ID
     (26) expresion -> . CINT
 
-    MENOS           shift and go to state 35
-    PAREN           shift and go to state 36
-    ID              shift and go to state 33
-    CINT            shift and go to state 37
+    MENOS           shift and go to state 37
+    PAREN           shift and go to state 38
+    ID              shift and go to state 35
+    CINT            shift and go to state 39
 
-    expresion                      shift and go to state 55
+    expresion                      shift and go to state 59
 
-state 48
+state 51
 
     (23) expresion -> MENOS expresion .
     (19) expresion -> expresion . MAS expresion
@@ -669,13 +701,13 @@ state 48
     DIV             reduce using rule 23 (expresion -> MENOS expresion .)
     TESIS           reduce using rule 23 (expresion -> MENOS expresion .)
 
-  ! MAS             [ shift and go to state 44 ]
-  ! MENOS           [ shift and go to state 45 ]
-  ! MUL             [ shift and go to state 46 ]
-  ! DIV             [ shift and go to state 47 ]
+  ! MAS             [ shift and go to state 47 ]
+  ! MENOS           [ shift and go to state 48 ]
+  ! MUL             [ shift and go to state 49 ]
+  ! DIV             [ shift and go to state 50 ]
 
 
-state 49
+state 52
 
     (24) expresion -> PAREN expresion . TESIS
     (19) expresion -> expresion . MAS expresion
@@ -683,28 +715,35 @@ state 49
     (21) expresion -> expresion . MUL expresion
     (22) expresion -> expresion . DIV expresion
 
-    TESIS           shift and go to state 56
-    MAS             shift and go to state 44
-    MENOS           shift and go to state 45
-    MUL             shift and go to state 46
-    DIV             shift and go to state 47
+    TESIS           shift and go to state 60
+    MAS             shift and go to state 47
+    MENOS           shift and go to state 48
+    MUL             shift and go to state 49
+    DIV             shift and go to state 50
 
 
-state 50
+state 53
 
     (27) llamada_funcion -> IMPCAD PAREN parametro TESIS . PC
 
-    PC              shift and go to state 57
+    PC              shift and go to state 61
 
 
-state 51
+state 54
 
-    (28) llamada_funcion -> LEERDIG PAREN ID TESIS . PC
+    (28) llamada_funcion -> IMPDIG PAREN parametro TESIS . PC
 
-    PC              shift and go to state 58
+    PC              shift and go to state 62
 
 
-state 52
+state 55
+
+    (29) llamada_funcion -> LEERDIG PAREN ID TESIS . PC
+
+    PC              shift and go to state 63
+
+
+state 56
 
     (19) expresion -> expresion MAS expresion .
     (19) expresion -> expresion . MAS expresion
@@ -716,16 +755,16 @@ state 52
     MAS             reduce using rule 19 (expresion -> expresion MAS expresion .)
     MENOS           reduce using rule 19 (expresion -> expresion MAS expresion .)
     TESIS           reduce using rule 19 (expresion -> expresion MAS expresion .)
-    MUL             shift and go to state 46
-    DIV             shift and go to state 47
+    MUL             shift and go to state 49
+    DIV             shift and go to state 50
 
   ! MUL             [ reduce using rule 19 (expresion -> expresion MAS expresion .) ]
   ! DIV             [ reduce using rule 19 (expresion -> expresion MAS expresion .) ]
-  ! MAS             [ shift and go to state 44 ]
-  ! MENOS           [ shift and go to state 45 ]
+  ! MAS             [ shift and go to state 47 ]
+  ! MENOS           [ shift and go to state 48 ]
 
 
-state 53
+state 57
 
     (20) expresion -> expresion MENOS expresion .
     (19) expresion -> expresion . MAS expresion
@@ -737,16 +776,16 @@ state 53
     MAS             reduce using rule 20 (expresion -> expresion MENOS expresion .)
     MENOS           reduce using rule 20 (expresion -> expresion MENOS expresion .)
     TESIS           reduce using rule 20 (expresion -> expresion MENOS expresion .)
-    MUL             shift and go to state 46
-    DIV             shift and go to state 47
+    MUL             shift and go to state 49
+    DIV             shift and go to state 50
 
   ! MUL             [ reduce using rule 20 (expresion -> expresion MENOS expresion .) ]
   ! DIV             [ reduce using rule 20 (expresion -> expresion MENOS expresion .) ]
-  ! MAS             [ shift and go to state 44 ]
-  ! MENOS           [ shift and go to state 45 ]
+  ! MAS             [ shift and go to state 47 ]
+  ! MENOS           [ shift and go to state 48 ]
 
 
-state 54
+state 58
 
     (21) expresion -> expresion MUL expresion .
     (19) expresion -> expresion . MAS expresion
@@ -761,13 +800,13 @@ state 54
     DIV             reduce using rule 21 (expresion -> expresion MUL expresion .)
     TESIS           reduce using rule 21 (expresion -> expresion MUL expresion .)
 
-  ! MAS             [ shift and go to state 44 ]
-  ! MENOS           [ shift and go to state 45 ]
-  ! MUL             [ shift and go to state 46 ]
-  ! DIV             [ shift and go to state 47 ]
+  ! MAS             [ shift and go to state 47 ]
+  ! MENOS           [ shift and go to state 48 ]
+  ! MUL             [ shift and go to state 49 ]
+  ! DIV             [ shift and go to state 50 ]
 
 
-state 55
+state 59
 
     (22) expresion -> expresion DIV expresion .
     (19) expresion -> expresion . MAS expresion
@@ -782,13 +821,13 @@ state 55
     DIV             reduce using rule 22 (expresion -> expresion DIV expresion .)
     TESIS           reduce using rule 22 (expresion -> expresion DIV expresion .)
 
-  ! MAS             [ shift and go to state 44 ]
-  ! MENOS           [ shift and go to state 45 ]
-  ! MUL             [ shift and go to state 46 ]
-  ! DIV             [ shift and go to state 47 ]
+  ! MAS             [ shift and go to state 47 ]
+  ! MENOS           [ shift and go to state 48 ]
+  ! MUL             [ shift and go to state 49 ]
+  ! DIV             [ shift and go to state 50 ]
 
 
-state 56
+state 60
 
     (24) expresion -> PAREN expresion TESIS .
 
@@ -800,22 +839,35 @@ state 56
     TESIS           reduce using rule 24 (expresion -> PAREN expresion TESIS .)
 
 
-state 57
+state 61
 
     (27) llamada_funcion -> IMPCAD PAREN parametro TESIS PC .
 
     ID              reduce using rule 27 (llamada_funcion -> IMPCAD PAREN parametro TESIS PC .)
     IMPCAD          reduce using rule 27 (llamada_funcion -> IMPCAD PAREN parametro TESIS PC .)
+    IMPDIG          reduce using rule 27 (llamada_funcion -> IMPCAD PAREN parametro TESIS PC .)
     LEERDIG         reduce using rule 27 (llamada_funcion -> IMPCAD PAREN parametro TESIS PC .)
     FIN             reduce using rule 27 (llamada_funcion -> IMPCAD PAREN parametro TESIS PC .)
 
 
-state 58
+state 62
 
-    (28) llamada_funcion -> LEERDIG PAREN ID TESIS PC .
+    (28) llamada_funcion -> IMPDIG PAREN parametro TESIS PC .
 
-    ID              reduce using rule 28 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
-    IMPCAD          reduce using rule 28 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
-    LEERDIG         reduce using rule 28 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
-    FIN             reduce using rule 28 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
+    ID              reduce using rule 28 (llamada_funcion -> IMPDIG PAREN parametro TESIS PC .)
+    IMPCAD          reduce using rule 28 (llamada_funcion -> IMPDIG PAREN parametro TESIS PC .)
+    IMPDIG          reduce using rule 28 (llamada_funcion -> IMPDIG PAREN parametro TESIS PC .)
+    LEERDIG         reduce using rule 28 (llamada_funcion -> IMPDIG PAREN parametro TESIS PC .)
+    FIN             reduce using rule 28 (llamada_funcion -> IMPDIG PAREN parametro TESIS PC .)
+
+
+state 63
+
+    (29) llamada_funcion -> LEERDIG PAREN ID TESIS PC .
+
+    ID              reduce using rule 29 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
+    IMPCAD          reduce using rule 29 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
+    IMPDIG          reduce using rule 29 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
+    LEERDIG         reduce using rule 29 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
+    FIN             reduce using rule 29 (llamada_funcion -> LEERDIG PAREN ID TESIS PC .)
 
