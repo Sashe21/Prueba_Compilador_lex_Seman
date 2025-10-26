@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftMASMENOSleftMULDIVrightUMINUSAND ASIG CAD CINT COMA DECL DIV ERROR ERROR_IDENTIFICADOR ERROR_IDENTIFICADOR_SIM FALS FIN ID IGUAL IMPBOOL IMPCAD IMPDIG IN INICIO INTER LEERBOOL LEERCAD LEERDIG MAS MENOS MIENTRAS MUL NOT OR PARA PAREN PC PROG SI SIGDIF SIGMAYOR SIGMENOR SINO TESIS TIPO TIPO_BOOL TIPO_CAD TIPO_INT UNION VERDprograma : PROG ID programa_declprograma_decl : declaraciones cuerpo_programa\n| cuerpo_programadeclaraciones : DECL lista_declaracioneslista_declaraciones : declaracion lista_declaraciones\n| declaraciondeclaracion : tipo lista_variables PCtipo : TIPO_INT\n| TIPO_CAD\n| TIPO_BOOLlista_variables : ID COMA lista_variables\n| IDcuerpo_programa : INICIO instrucciones FINinstrucciones : instruccion instrucciones\n| instruccioninstruccion : asignacion\n| llamada_funcion\n| estructura_controlestructura_control : si_entonces\n| mientras_hacer\n| para_hacersi_entonces : SI PAREN expresion TESIS instruccion\n| SI PAREN expresion TESIS instruccion SINO instruccionmientras_hacer : MIENTRAS PAREN expresion TESIS instruccionpara_hacer : PARA PAREN asignacion expresion PC expresion TESIS instruccionasignacion : ID ASIG expresion PCexpresion : expresion MAS expresion\n| expresion MENOS expresion\n| expresion MUL expresion\n| expresion DIV expresionexpresion : MENOS expresion %prec UMINUSexpresion : PAREN expresion TESISexpresion : ID\n| CINTllamada_funcion : IMPCAD PAREN parametro TESIS PC\n| IMPDIG PAREN parametro TESIS PC\n| LEERDIG PAREN ID TESIS PCparametro : CAD\n| ID'
+_lr_signature = 'leftMASMENOSleftMULDIVrightUMINUSAND ASIG CAD CINT COMA DECL DIV ERROR ERROR_IDENTIFICADOR ERROR_IDENTIFICADOR_SIM FALS FIN ID IGUAL IMPBOOL IMPCAD IMPDIG IN INICIO INTER LEERBOOL LEERCAD LEERDIG MAS MENOS MIENTRAS MUL NOT OR PARA PAREN PC PROG SI SIGDIF SIGMAYOR SIGMENOR SINO TESIS TIPO TIPO_BOOL TIPO_CAD TIPO_INT UNION VERDprograma : PROG ID programa_declprograma_decl : declaraciones cuerpo_programa\n| cuerpo_programadeclaraciones : DECL lista_declaracioneslista_declaraciones : declaracion lista_declaraciones\n| declaraciondeclaracion : tipo lista_variables PCtipo : TIPO_INT\n| TIPO_CAD\n| TIPO_BOOLlista_variables : ID COMA lista_variables\n| IDcuerpo_programa : INICIO instrucciones FINinstrucciones : instruccion instrucciones\n| instruccioninstruccion : asignacion\n| llamada_funcion\n| estructura_controlestructura_control : si_entonces\n| mientras_hacer\n| para_hacersi_entonces : SI PAREN expresion TESIS instruccion\n| SI PAREN expresion TESIS instruccion SINO instruccionmientras_hacer : MIENTRAS PAREN expresion TESIS instruccionpara_hacer : PARA PAREN asignacion expresion PC expresion TESIS instruccionasignacion : ID ASIG expresion PCexpresion : expresion MAS expresion\n| expresion MENOS expresion\n| expresion MUL expresion\n| expresion DIV expresionexpresion : MENOS expresion %prec UMINUSexpresion : PAREN expresion TESISexpresion : ID\n| CINT\n| CADllamada_funcion : IMPCAD PAREN parametro TESIS PC\n| IMPDIG PAREN parametro TESIS PC\n| LEERDIG PAREN ID TESIS PCparametro : CAD\n| ID'
     
-_lr_action_items = {'PROG':([0,],[2,]),'$end':([1,4,6,9,34,],[0,-1,-3,-2,-13,]),'ID':([2,8,12,13,14,15,17,18,19,20,25,26,27,36,37,38,39,40,41,42,44,47,48,57,59,60,61,62,63,69,70,77,78,79,80,81,82,83,85,86,87,],[3,21,33,-8,-9,-10,21,-16,-17,-18,-19,-20,-21,45,52,52,54,45,45,21,33,45,45,45,-26,45,45,45,45,21,21,-35,-36,-37,-22,-24,45,21,-23,21,-25,]),'DECL':([3,],[7,]),'INICIO':([3,5,10,11,31,43,],[8,8,-4,-6,-5,-7,]),'TIPO_INT':([7,11,43,],[13,13,-7,]),'TIPO_CAD':([7,11,43,],[14,14,-7,]),'TIPO_BOOL':([7,11,43,],[15,15,-7,]),'IMPCAD':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[22,22,-16,-17,-18,-19,-20,-21,-26,22,22,-35,-36,-37,-22,-24,22,-23,22,-25,]),'IMPDIG':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[23,23,-16,-17,-18,-19,-20,-21,-26,23,23,-35,-36,-37,-22,-24,23,-23,23,-25,]),'LEERDIG':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[24,24,-16,-17,-18,-19,-20,-21,-26,24,24,-35,-36,-37,-22,-24,24,-23,24,-25,]),'SI':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[28,28,-16,-17,-18,-19,-20,-21,-26,28,28,-35,-36,-37,-22,-24,28,-23,28,-25,]),'MIENTRAS':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[29,29,-16,-17,-18,-19,-20,-21,-26,29,29,-35,-36,-37,-22,-24,29,-23,29,-25,]),'PARA':([8,17,18,19,20,25,26,27,59,69,70,77,78,79,80,81,83,85,86,87,],[30,30,-16,-17,-18,-19,-20,-21,-26,30,30,-35,-36,-37,-22,-24,30,-23,30,-25,]),'FIN':([16,17,18,19,20,25,26,27,35,59,77,78,79,80,81,85,87,],[34,-15,-16,-17,-18,-19,-20,-21,-14,-26,-35,-36,-37,-22,-24,-23,-25,]),'SINO':([18,19,20,25,26,27,59,77,78,79,80,81,85,87,],[-16,-17,-18,-19,-20,-21,-26,-35,-36,-37,83,-24,-23,-25,]),'ASIG':([21,],[36,]),'PAREN':([22,23,24,28,29,30,36,40,41,47,48,57,59,60,61,62,63,82,],[37,38,39,40,41,42,48,48,48,48,48,48,-26,48,48,48,48,48,]),'PC':([32,33,45,46,49,58,64,66,67,68,71,72,73,74,75,76,],[43,-12,-33,59,-34,-11,-31,77,78,79,82,-27,-28,-29,-30,-32,]),'COMA':([33,],[44,]),'MENOS':([36,40,41,45,46,47,48,49,55,56,57,59,60,61,62,63,64,65,71,72,73,74,75,76,82,84,],[47,47,47,-33,61,47,47,-34,61,61,47,-26,47,47,47,47,-31,61,61,-27,-28,-29,-30,-32,47,61,]),'CINT':([36,40,41,47,48,57,59,60,61,62,63,82,],[49,49,49,49,49,49,-26,49,49,49,49,49,]),'CAD':([37,38,],[51,51,]),'MAS':([45,46,49,55,56,64,65,71,72,73,74,75,76,84,],[-33,60,-34,60,60,-31,60,60,-27,-28,-29,-30,-32,60,]),'MUL':([45,46,49,55,56,64,65,71,72,73,74,75,76,84,],[-33,62,-34,62,62,-31,62,62,62,62,-29,-30,-32,62,]),'DIV':([45,46,49,55,56,64,65,71,72,73,74,75,76,84,],[-33,63,-34,63,63,-31,63,63,63,63,-29,-30,-32,63,]),'TESIS':([45,49,50,51,52,53,54,55,56,64,65,72,73,74,75,76,84,],[-33,-34,66,-38,-39,67,68,69,70,-31,76,-27,-28,-29,-30,-32,86,]),}
+_lr_action_items = {'PROG':([0,],[2,]),'$end':([1,4,6,9,34,],[0,-1,-3,-2,-13,]),'ID':([2,8,12,13,14,15,17,18,19,20,25,26,27,36,37,38,39,40,41,42,44,47,48,58,60,61,62,63,64,70,71,78,79,80,81,82,83,84,86,87,88,],[3,21,33,-8,-9,-10,21,-16,-17,-18,-19,-20,-21,45,53,53,55,45,45,21,33,45,45,45,-26,45,45,45,45,21,21,-36,-37,-38,-22,-24,45,21,-23,21,-25,]),'DECL':([3,],[7,]),'INICIO':([3,5,10,11,31,43,],[8,8,-4,-6,-5,-7,]),'TIPO_INT':([7,11,43,],[13,13,-7,]),'TIPO_CAD':([7,11,43,],[14,14,-7,]),'TIPO_BOOL':([7,11,43,],[15,15,-7,]),'IMPCAD':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[22,22,-16,-17,-18,-19,-20,-21,-26,22,22,-36,-37,-38,-22,-24,22,-23,22,-25,]),'IMPDIG':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[23,23,-16,-17,-18,-19,-20,-21,-26,23,23,-36,-37,-38,-22,-24,23,-23,23,-25,]),'LEERDIG':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[24,24,-16,-17,-18,-19,-20,-21,-26,24,24,-36,-37,-38,-22,-24,24,-23,24,-25,]),'SI':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[28,28,-16,-17,-18,-19,-20,-21,-26,28,28,-36,-37,-38,-22,-24,28,-23,28,-25,]),'MIENTRAS':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[29,29,-16,-17,-18,-19,-20,-21,-26,29,29,-36,-37,-38,-22,-24,29,-23,29,-25,]),'PARA':([8,17,18,19,20,25,26,27,60,70,71,78,79,80,81,82,84,86,87,88,],[30,30,-16,-17,-18,-19,-20,-21,-26,30,30,-36,-37,-38,-22,-24,30,-23,30,-25,]),'FIN':([16,17,18,19,20,25,26,27,35,60,78,79,80,81,82,86,88,],[34,-15,-16,-17,-18,-19,-20,-21,-14,-26,-36,-37,-38,-22,-24,-23,-25,]),'SINO':([18,19,20,25,26,27,60,78,79,80,81,82,86,88,],[-16,-17,-18,-19,-20,-21,-26,-36,-37,-38,84,-24,-23,-25,]),'ASIG':([21,],[36,]),'PAREN':([22,23,24,28,29,30,36,40,41,47,48,58,60,61,62,63,64,83,],[37,38,39,40,41,42,48,48,48,48,48,48,-26,48,48,48,48,48,]),'PC':([32,33,45,46,49,50,59,65,67,68,69,72,73,74,75,76,77,],[43,-12,-33,60,-34,-35,-11,-31,78,79,80,83,-27,-28,-29,-30,-32,]),'COMA':([33,],[44,]),'MENOS':([36,40,41,45,46,47,48,49,50,56,57,58,60,61,62,63,64,65,66,72,73,74,75,76,77,83,85,],[47,47,47,-33,62,47,47,-34,-35,62,62,47,-26,47,47,47,47,-31,62,62,-27,-28,-29,-30,-32,47,62,]),'CINT':([36,40,41,47,48,58,60,61,62,63,64,83,],[49,49,49,49,49,49,-26,49,49,49,49,49,]),'CAD':([36,37,38,40,41,47,48,58,60,61,62,63,64,83,],[50,52,52,50,50,50,50,50,-26,50,50,50,50,50,]),'MAS':([45,46,49,50,56,57,65,66,72,73,74,75,76,77,85,],[-33,61,-34,-35,61,61,-31,61,61,-27,-28,-29,-30,-32,61,]),'MUL':([45,46,49,50,56,57,65,66,72,73,74,75,76,77,85,],[-33,63,-34,-35,63,63,-31,63,63,63,63,-29,-30,-32,63,]),'DIV':([45,46,49,50,56,57,65,66,72,73,74,75,76,77,85,],[-33,64,-34,-35,64,64,-31,64,64,64,64,-29,-30,-32,64,]),'TESIS':([45,49,50,51,52,53,54,55,56,57,65,66,73,74,75,76,77,85,],[-33,-34,-35,67,-39,-40,68,69,70,71,-31,77,-27,-28,-29,-30,-32,87,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programa':([0,],[1,]),'programa_decl':([3,],[4,]),'declaraciones':([3,],[5,]),'cuerpo_programa':([3,5,],[6,9,]),'lista_declaraciones':([7,11,],[10,31,]),'declaracion':([7,11,],[11,11,]),'tipo':([7,11,],[12,12,]),'instrucciones':([8,17,],[16,35,]),'instruccion':([8,17,69,70,83,86,],[17,17,80,81,85,87,]),'asignacion':([8,17,42,69,70,83,86,],[18,18,57,18,18,18,18,]),'llamada_funcion':([8,17,69,70,83,86,],[19,19,19,19,19,19,]),'estructura_control':([8,17,69,70,83,86,],[20,20,20,20,20,20,]),'si_entonces':([8,17,69,70,83,86,],[25,25,25,25,25,25,]),'mientras_hacer':([8,17,69,70,83,86,],[26,26,26,26,26,26,]),'para_hacer':([8,17,69,70,83,86,],[27,27,27,27,27,27,]),'lista_variables':([12,44,],[32,58,]),'expresion':([36,40,41,47,48,57,60,61,62,63,82,],[46,55,56,64,65,71,72,73,74,75,84,]),'parametro':([37,38,],[50,53,]),}
+_lr_goto_items = {'programa':([0,],[1,]),'programa_decl':([3,],[4,]),'declaraciones':([3,],[5,]),'cuerpo_programa':([3,5,],[6,9,]),'lista_declaraciones':([7,11,],[10,31,]),'declaracion':([7,11,],[11,11,]),'tipo':([7,11,],[12,12,]),'instrucciones':([8,17,],[16,35,]),'instruccion':([8,17,70,71,84,87,],[17,17,81,82,86,88,]),'asignacion':([8,17,42,70,71,84,87,],[18,18,58,18,18,18,18,]),'llamada_funcion':([8,17,70,71,84,87,],[19,19,19,19,19,19,]),'estructura_control':([8,17,70,71,84,87,],[20,20,20,20,20,20,]),'si_entonces':([8,17,70,71,84,87,],[25,25,25,25,25,25,]),'mientras_hacer':([8,17,70,71,84,87,],[26,26,26,26,26,26,]),'para_hacer':([8,17,70,71,84,87,],[27,27,27,27,27,27,]),'lista_variables':([12,44,],[32,59,]),'expresion':([36,40,41,47,48,58,61,62,63,64,83,],[46,56,57,65,66,72,73,74,75,76,85,]),'parametro':([37,38,],[51,54,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,43 +27,44 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> programa","S'",1,None,None,None),
-  ('programa -> PROG ID programa_decl','programa',3,'p_programa','Analisador_Compilador.py',370),
-  ('programa_decl -> declaraciones cuerpo_programa','programa_decl',2,'p_programa_decl','Analisador_Compilador.py',377),
-  ('programa_decl -> cuerpo_programa','programa_decl',1,'p_programa_decl','Analisador_Compilador.py',378),
-  ('declaraciones -> DECL lista_declaraciones','declaraciones',2,'p_declaraciones','Analisador_Compilador.py',382),
-  ('lista_declaraciones -> declaracion lista_declaraciones','lista_declaraciones',2,'p_lista_declaraciones','Analisador_Compilador.py',386),
-  ('lista_declaraciones -> declaracion','lista_declaraciones',1,'p_lista_declaraciones','Analisador_Compilador.py',387),
-  ('declaracion -> tipo lista_variables PC','declaracion',3,'p_declaracion','Analisador_Compilador.py',391),
-  ('tipo -> TIPO_INT','tipo',1,'p_tipo','Analisador_Compilador.py',395),
-  ('tipo -> TIPO_CAD','tipo',1,'p_tipo','Analisador_Compilador.py',396),
-  ('tipo -> TIPO_BOOL','tipo',1,'p_tipo','Analisador_Compilador.py',397),
-  ('lista_variables -> ID COMA lista_variables','lista_variables',3,'p_lista_variables','Analisador_Compilador.py',409),
-  ('lista_variables -> ID','lista_variables',1,'p_lista_variables','Analisador_Compilador.py',410),
-  ('cuerpo_programa -> INICIO instrucciones FIN','cuerpo_programa',3,'p_cuerpo_programa','Analisador_Compilador.py',422),
-  ('instrucciones -> instruccion instrucciones','instrucciones',2,'p_instrucciones','Analisador_Compilador.py',427),
-  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones','Analisador_Compilador.py',428),
-  ('instruccion -> asignacion','instruccion',1,'p_instruccion','Analisador_Compilador.py',432),
-  ('instruccion -> llamada_funcion','instruccion',1,'p_instruccion','Analisador_Compilador.py',433),
-  ('instruccion -> estructura_control','instruccion',1,'p_instruccion','Analisador_Compilador.py',434),
-  ('estructura_control -> si_entonces','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',438),
-  ('estructura_control -> mientras_hacer','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',439),
-  ('estructura_control -> para_hacer','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',440),
-  ('si_entonces -> SI PAREN expresion TESIS instruccion','si_entonces',5,'p_si_entonces','Analisador_Compilador.py',444),
-  ('si_entonces -> SI PAREN expresion TESIS instruccion SINO instruccion','si_entonces',7,'p_si_entonces','Analisador_Compilador.py',445),
-  ('mientras_hacer -> MIENTRAS PAREN expresion TESIS instruccion','mientras_hacer',5,'p_mientras_hacer','Analisador_Compilador.py',466),
-  ('para_hacer -> PARA PAREN asignacion expresion PC expresion TESIS instruccion','para_hacer',8,'p_para_hacer','Analisador_Compilador.py',479),
-  ('asignacion -> ID ASIG expresion PC','asignacion',4,'p_asignacion','Analisador_Compilador.py',494),
-  ('expresion -> expresion MAS expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',532),
-  ('expresion -> expresion MENOS expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',533),
-  ('expresion -> expresion MUL expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',534),
-  ('expresion -> expresion DIV expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',535),
-  ('expresion -> MENOS expresion','expresion',2,'p_expresion_unaria','Analisador_Compilador.py',572),
-  ('expresion -> PAREN expresion TESIS','expresion',3,'p_expresion_parentesis','Analisador_Compilador.py',579),
-  ('expresion -> ID','expresion',1,'p_expresion_factor','Analisador_Compilador.py',585),
-  ('expresion -> CINT','expresion',1,'p_expresion_factor','Analisador_Compilador.py',586),
-  ('llamada_funcion -> IMPCAD PAREN parametro TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',600),
-  ('llamada_funcion -> IMPDIG PAREN parametro TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',601),
-  ('llamada_funcion -> LEERDIG PAREN ID TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',602),
-  ('parametro -> CAD','parametro',1,'p_parametro','Analisador_Compilador.py',666),
-  ('parametro -> ID','parametro',1,'p_parametro','Analisador_Compilador.py',667),
+  ('programa -> PROG ID programa_decl','programa',3,'p_programa','Analisador_Compilador.py',378),
+  ('programa_decl -> declaraciones cuerpo_programa','programa_decl',2,'p_programa_decl','Analisador_Compilador.py',387),
+  ('programa_decl -> cuerpo_programa','programa_decl',1,'p_programa_decl','Analisador_Compilador.py',388),
+  ('declaraciones -> DECL lista_declaraciones','declaraciones',2,'p_declaraciones','Analisador_Compilador.py',392),
+  ('lista_declaraciones -> declaracion lista_declaraciones','lista_declaraciones',2,'p_lista_declaraciones','Analisador_Compilador.py',396),
+  ('lista_declaraciones -> declaracion','lista_declaraciones',1,'p_lista_declaraciones','Analisador_Compilador.py',397),
+  ('declaracion -> tipo lista_variables PC','declaracion',3,'p_declaracion','Analisador_Compilador.py',401),
+  ('tipo -> TIPO_INT','tipo',1,'p_tipo','Analisador_Compilador.py',405),
+  ('tipo -> TIPO_CAD','tipo',1,'p_tipo','Analisador_Compilador.py',406),
+  ('tipo -> TIPO_BOOL','tipo',1,'p_tipo','Analisador_Compilador.py',407),
+  ('lista_variables -> ID COMA lista_variables','lista_variables',3,'p_lista_variables','Analisador_Compilador.py',419),
+  ('lista_variables -> ID','lista_variables',1,'p_lista_variables','Analisador_Compilador.py',420),
+  ('cuerpo_programa -> INICIO instrucciones FIN','cuerpo_programa',3,'p_cuerpo_programa','Analisador_Compilador.py',432),
+  ('instrucciones -> instruccion instrucciones','instrucciones',2,'p_instrucciones','Analisador_Compilador.py',437),
+  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones','Analisador_Compilador.py',438),
+  ('instruccion -> asignacion','instruccion',1,'p_instruccion','Analisador_Compilador.py',442),
+  ('instruccion -> llamada_funcion','instruccion',1,'p_instruccion','Analisador_Compilador.py',443),
+  ('instruccion -> estructura_control','instruccion',1,'p_instruccion','Analisador_Compilador.py',444),
+  ('estructura_control -> si_entonces','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',448),
+  ('estructura_control -> mientras_hacer','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',449),
+  ('estructura_control -> para_hacer','estructura_control',1,'p_estructura_control','Analisador_Compilador.py',450),
+  ('si_entonces -> SI PAREN expresion TESIS instruccion','si_entonces',5,'p_si_entonces','Analisador_Compilador.py',454),
+  ('si_entonces -> SI PAREN expresion TESIS instruccion SINO instruccion','si_entonces',7,'p_si_entonces','Analisador_Compilador.py',455),
+  ('mientras_hacer -> MIENTRAS PAREN expresion TESIS instruccion','mientras_hacer',5,'p_mientras_hacer','Analisador_Compilador.py',487),
+  ('para_hacer -> PARA PAREN asignacion expresion PC expresion TESIS instruccion','para_hacer',8,'p_para_hacer','Analisador_Compilador.py',514),
+  ('asignacion -> ID ASIG expresion PC','asignacion',4,'p_asignacion','Analisador_Compilador.py',549),
+  ('expresion -> expresion MAS expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',587),
+  ('expresion -> expresion MENOS expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',588),
+  ('expresion -> expresion MUL expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',589),
+  ('expresion -> expresion DIV expresion','expresion',3,'p_expresion_binaria','Analisador_Compilador.py',590),
+  ('expresion -> MENOS expresion','expresion',2,'p_expresion_unaria','Analisador_Compilador.py',640),
+  ('expresion -> PAREN expresion TESIS','expresion',3,'p_expresion_parentesis','Analisador_Compilador.py',647),
+  ('expresion -> ID','expresion',1,'p_expresion_factor','Analisador_Compilador.py',653),
+  ('expresion -> CINT','expresion',1,'p_expresion_factor','Analisador_Compilador.py',654),
+  ('expresion -> CAD','expresion',1,'p_expresion_factor','Analisador_Compilador.py',655),
+  ('llamada_funcion -> IMPCAD PAREN parametro TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',673),
+  ('llamada_funcion -> IMPDIG PAREN parametro TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',674),
+  ('llamada_funcion -> LEERDIG PAREN ID TESIS PC','llamada_funcion',5,'p_llamada_funcion','Analisador_Compilador.py',675),
+  ('parametro -> CAD','parametro',1,'p_parametro','Analisador_Compilador.py',767),
+  ('parametro -> ID','parametro',1,'p_parametro','Analisador_Compilador.py',768),
 ]
